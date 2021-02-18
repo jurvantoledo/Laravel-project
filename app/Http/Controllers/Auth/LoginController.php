@@ -24,7 +24,7 @@ class LoginController extends Controller
             'password' => 'required',
             ]);
 
-         if (!auth()->attempt($request->only('email', 'password'))) //The only() method gives back an array of the items you want
+         if (!auth()->attempt($request->only('email', 'password'), $request->remember)) //The only() method gives back an array of the items you want
          {
             return back()->with('status', 'Invalid login details');
          };
