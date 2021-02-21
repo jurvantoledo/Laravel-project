@@ -22,7 +22,7 @@ class PostFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'body' => $this->faker->sentence(20), // 20 stays for 20 words
         ];
     }
 }

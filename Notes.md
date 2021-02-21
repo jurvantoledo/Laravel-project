@@ -64,3 +64,28 @@ return view('posts.index');
 ## Pagination
 
 {{ $posts->links() }} This creates the pagination for you
+
+## Factories
+
+use: php artisan tinker in your terminal
+then: App\Models\Post::factory()->times(200)->create(['user_id' => 2]);
+
+setup definition in factory
+
+EXAMPLE:
+@return array
+\*/
+public function definition()
+{
+return [
+'body' => $this->faker->sentence(20), // 20 stays for 20 words
+];
+}
+}
+
+So now if we run App\Models\Post::factory()->times(200)->create(['user_id' => 2]); in the terminal that's gonna generate a list of 200 posts assinging the user_id of 2
+
+You can use factories for:
+
+-   generating lot of fake data in once
+-   testing
