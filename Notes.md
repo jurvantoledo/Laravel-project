@@ -28,7 +28,7 @@ Or:
 
 $table->foreignId('user_id')->constrained()->onDelete('cascade');
 
-onDelete('cascade') means if the user is deleted all the user posts are also deleted
+onDelete('cascade') means if the user is deleted all the posts the user submitted are also deleted
 
 so you can post many posts add this to the User model  
 public function posts()
