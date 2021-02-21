@@ -9,7 +9,13 @@ class PostController extends Controller
 {
     public function index() 
     {
-        return view('posts.index');
+     //  $posts = Post::get(); // this will return all posts in the natural database order
+     // $post = Post::paginate(2); // This method takes the amount of arguments you give it 
+                                   // so paginate(2) means to arguments per page
+
+     return view('posts.index', [
+            //'posts' => $posts
+        ]); // so if you want to get all the posts you need to pass them in a array in the view
     }
 
     public function store(Request $request) 

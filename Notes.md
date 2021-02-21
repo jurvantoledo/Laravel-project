@@ -60,3 +60,7 @@ return view('posts.index');
     }
 
     So you get the posts() out of user() and create a new post inside the posts() model
+
+## Pagination
+
+{{ $posts->links() }} This creates the pagination for you
