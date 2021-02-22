@@ -10,7 +10,7 @@ class PostLikeController extends Controller
     public function _construct() 
     {
         $this->middleware(['auth']);
-    } // as an unauthneticated user you cant like or unlike posts now
+    } // as an unauthneticated user you can't like posts now
 
     public function store(Post $post, Request $request) 
     {

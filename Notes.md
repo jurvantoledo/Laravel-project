@@ -94,18 +94,22 @@ You can use factories for:
 
 <div class="flex items-center">
   So if the post is liked by a user show the first form else show the second one
-  @if (!$post->likedBy(auth()->user()))
-    <form action="{{ route('posts.likes', $post) }}" method="post" class="mr-1">
+  @auth
+    @if (!$post->likedBy(auth()->user()))
+      <form action="{{ route('posts.likes', $post) }}" method="post" class="mr-1">
+        @csrf
+        <button type="submit" class="text-blue-500">Like</button>
+      </form>
+    @else
+      <form action="{{ route('posts.likes', $post) }}" method="post" class="mr-1"> 
       @csrf
-      <button type="submit" class="text-blue-500">Like</button>
+      @method('DELETE')
+      <button  type="submit" class="text-blue-500">Unlike</button>
     </form>
-  @else
-    <form action="{{ route('posts.likes', $post) }}" method="post" class="mr-1"> 
-    @csrf
-    @method('DELETE')
-    <button  type="submit" class="text-blue-500">Unlike</button>
-  </form>
-  @endif
+    @endif
+  @endauth
+
+Use the auth around the like/unlike forms so you can properly login and out Signed out users can now only see the likes
 
 this will count the amount of likes on a post
 <span>{{ $post->likes->count() }} {{ Str::plural('like',$post->likes->count()) }}</span>
@@ -121,3 +125,9 @@ Str::plural will pluralise the Like to Likes if there is more then 1 Like
    ];
 
 you need to use the @method('DELETE') in your blade to actually delete something
+
+## Eager Loading
+
+$post = Post::with(['user', 'likes'])->paginate(20);
+
+So now we eager loading in the User and Likes relationships from the Post model to reduce queries
