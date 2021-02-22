@@ -89,3 +89,22 @@ You can use factories for:
 
 -   generating lot of fake data in once
 -   testing
+
+## Liking & Unliking posts
+
+<div class="flex items-center">
+  <form action="" method="post" class="mr-1">
+    @csrf
+    <button type="submit" class="text-blue-500">Like</button>
+  </form>
+    <form action="" method="post" class="mr-1"> 
+    @csrf
+    <button  type="submit" class="text-blue-500">Unlike</button>
+  </form>
+
+this will count the amount of likes on a post
+<span>{{ $post->likes->count() }} {{ Str::plural('like',$post->likes->count()) }}</span>
+
+Str::plural will pluralise the Like to Likes if there is more then 1 Like
+
+</div>
