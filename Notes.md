@@ -169,7 +169,7 @@ In the AuthServiceProvider you can add the Models you want to be protected by yo
   </form>
 @endcan
 
-With this you can only see the things you can delete for example
+With this you can only see the things you can delete
 
 ## Blade component
 
