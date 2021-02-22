@@ -170,3 +170,7 @@ In the AuthServiceProvider you can add the Models you want to be protected by yo
 @endcan
 
 With can you can only see the things you can delete for example
+
+## Blade component
+
+Add this <x-name-of-component :post="$post" />
