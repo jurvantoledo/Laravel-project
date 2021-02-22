@@ -173,4 +173,4 @@ With this you can only see the things you can delete
 
 ## Blade component
 
-Add this <x-name-of-component :post="$post" />
+Add this <x-name-of-component :post="$post" /> <x-post :post="$post" />
