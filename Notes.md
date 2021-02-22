@@ -93,14 +93,19 @@ You can use factories for:
 ## Liking & Unliking posts
 
 <div class="flex items-center">
-  <form action="" method="post" class="mr-1">
+  So if the post is liked by a user show the first form else show the second one
+  @if (!$post->likedBy(auth()->user()))
+    <form action="{{ route('posts.likes', $post) }}" method="post" class="mr-1">
+      @csrf
+      <button type="submit" class="text-blue-500">Like</button>
+    </form>
+  @else
+    <form action="{{ route('posts.likes', $post) }}" method="post" class="mr-1"> 
     @csrf
-    <button type="submit" class="text-blue-500">Like</button>
-  </form>
-    <form action="" method="post" class="mr-1"> 
-    @csrf
+    @method('DELETE')
     <button  type="submit" class="text-blue-500">Unlike</button>
   </form>
+  @endif
 
 this will count the amount of likes on a post
 <span>{{ $post->likes->count() }} {{ Str::plural('like',$post->likes->count()) }}</span>
@@ -108,3 +113,11 @@ this will count the amount of likes on a post
 Str::plural will pluralise the Like to Likes if there is more then 1 Like
 
 </div>
+
+1. You can bind models using $id in the route and finding the right $id
+
+2. by using the Post model in the controller link it through $post and say you want to find the $id. If you choose for the second option dont forget to add in your Like model: protected $fillable = [
+   'user_id'
+   ];
+
+you need to use the @method('DELETE') in your blade to actually delete something
