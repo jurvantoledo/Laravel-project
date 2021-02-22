@@ -30,4 +30,14 @@ class PostController extends Controller
 
         return back();
     }
+
+    public function destroy(Post $post, Request $request) 
+    {
+        $this->authorize('delete', $post);
+        // delete is the method name we defined in our PostPolicy
+
+        $post->delete();
+
+        return back();
+    }
 }

@@ -131,3 +131,42 @@ you need to use the @method('DELETE') in your blade to actually delete something
 $post = Post::with(['user', 'likes'])->paginate(20);
 
 So now we eager loading in the User and Likes relationships from the Post model to reduce queries
+
+## Deleting Posts
+
+@if ($post->ownedBy(auth()->user()))
+
+  <div>
+    <form action="{{ route('posts.destroy', $post) }}" method="post" class="mr-1"> 
+        @csrf
+        @method('DELETE')
+        <button  type="submit" class="text-red-500">Delete</button>
+    </form>
+  </div>
+
+@endif
+
+So if the post is owned by the authenticated user you can now delete that post
+
+Dont forget to add this in your postController:
+
+$post = Post::latest()->with(['user', 'likes'])->paginate(20);
+
+This latest() method will get your own posts at the top of the posts section
+
+## Policy
+
+You can use Policy to add lines of codes that will check if certain things can or cannot be done
+
+In the AuthServiceProvider you can add the Models you want to be protected by your policies
+
+@can('delete, $post')
+
+  <form action="{{ route('posts.destroy', $post) }}" method="post" class="mr-1">
+    @csrf
+    @method('DELETE')
+    <button  type="submit" class="text-red-500">Delete</button>
+  </form>
+@endcan
+
+With can you can only see the things you can delete for example

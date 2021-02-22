@@ -38,6 +38,7 @@ Route::post('/register', [RegisterController::class, 'store']);
 
 Route::get('/posts', [PostController::class, 'index'])->name('posts'); // Index in the end is because we use the index function method
 Route::post('/posts', [PostController::class, 'store']);
+Route::delete('/posts/{post}', [PostController::class, 'destroy'])->name('posts.destroy');
 
 Route::post('/posts/{post}/likes', [PostLikeController::class, 'store'])->name('posts.likes'); // Index in the end is because we use the index function method
 Route::delete('/posts/{post}/likes', [PostLikeController::class, 'destroy'])->name('posts.likes'); // Index in the end is because we use the index function method

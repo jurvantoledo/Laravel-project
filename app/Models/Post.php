@@ -22,7 +22,15 @@ class Post extends Model
        // contains() is a laravel connection method so right now 
        // we added the user id and we check if 
        // the user with that id already liked the post 
-    } 
+    }
+
+    // function to check which posts are yours and you can delete
+    public function ownedBy(User $user)
+    {
+        return $user->id === $this->user_id;
+        // this will check if the user id is equal to the post user_id 
+        // so if user.id = 1 and user_id=1 it is yours and you can delete it
+    }
 
     public function user() 
     {
